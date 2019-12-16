@@ -1,0 +1,12 @@
+package com.personal.yzq;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TokenApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(TokenApplication.class, args);
+    }
+}

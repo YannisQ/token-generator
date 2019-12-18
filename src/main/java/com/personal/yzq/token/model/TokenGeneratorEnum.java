@@ -12,13 +12,13 @@ public enum TokenGeneratorEnum {
     SSO_COOKIE(SsoTokenGenerator::new),
     CLIENT(SystemTokenGenerator::new);
 
-    private final Function<TokenReqInfo,TokenGenerator> constructor;
+    private final Function<TokenReqInfo,DefaultTokenGenerator> constructor;
 
-    TokenGeneratorEnum(Function<TokenReqInfo,TokenGenerator> constructor) {
+    TokenGeneratorEnum(Function<TokenReqInfo,DefaultTokenGenerator> constructor) {
         this.constructor = constructor;
     }
 
-    public Function<TokenReqInfo,TokenGenerator> getConstructor() {
+    public Function<TokenReqInfo,DefaultTokenGenerator> getConstructor() {
         return constructor;
     }
 

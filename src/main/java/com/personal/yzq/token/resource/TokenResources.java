@@ -1,9 +1,9 @@
 package com.personal.yzq.token.resource;
 
 import com.personal.yzq.token.model.GetTokenCommand;
-import com.personal.yzq.token.model.ResultInfo;
 import com.personal.yzq.token.model.TokenReqInfo;
-import com.personal.yzq.token.model.entity.Token;
+import com.personal.yzq.token.model.TokenWrapper;
+import com.personal.yzq.token.representation.ResultInfo;
 import com.personal.yzq.token.representation.TokenRepresentation;
 import com.personal.yzq.token.service.TokenApplicationService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +29,11 @@ public class TokenResources {
     public ResultInfo<TokenRepresentation> getToken(@RequestBody @Valid TokenReqInfo tokenReqInfo,
                                                     HttpServletResponse response) throws MethodArgumentNotValidException {
         GetTokenCommand getTokenCommand = new GetTokenCommand(tokenReqInfo);
-        Token token = tokenService.getToken(getTokenCommand);
-        addResponseHeadersIfNecessary(getTokenCommand, response);
-        return token.convertToRepresentation();
+        TokenWrapper tokenWrapper = tokenService.getToken(getTokenCommand);
+        addResponseHeadersIfNecessary(tokenWrapper, response);
+        return tokenWrapper.convertToRepresentation();
     }
 
-    private void addResponseHeadersIfNecessary(GetTokenCommand getTokenCommand, HttpServletResponse response) {
+    private void addResponseHeadersIfNecessary(TokenWrapper tokenWrapper, HttpServletResponse response) {
     }
 }

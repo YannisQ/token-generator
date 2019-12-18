@@ -1,23 +1,22 @@
 package com.personal.yzq.token.core;
 
 import com.personal.yzq.token.model.TokenReqInfo;
-import com.personal.yzq.token.model.entity.Token;
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import com.personal.yzq.token.model.TokenWrapper;
 
-public class SystemTokenGenerator extends TokenGenerator {
+public class SystemTokenGenerator extends DefaultTokenGenerator {
 
     public SystemTokenGenerator(TokenReqInfo reqInfo) {
         super(reqInfo);
     }
 
     @Override
-    protected boolean isPermitted() throws MethodArgumentNotValidException {
+    protected boolean isPermitted() {
 
         return false;
     }
 
     @Override
-    protected Token createToken() {
+    protected TokenWrapper createToken() {
         return null;
     }
 }

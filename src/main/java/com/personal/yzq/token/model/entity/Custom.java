@@ -2,9 +2,11 @@ package com.personal.yzq.token.model.entity;
 
 import com.personal.yzq.token.model.CustomAuthority;
 import com.personal.yzq.token.model.valobj.CustomTenant;
+import lombok.Value;
 
 import java.util.List;
 
+@Value
 public class Custom {
 
     private String systemId;

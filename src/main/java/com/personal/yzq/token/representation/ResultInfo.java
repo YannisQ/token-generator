@@ -1,4 +1,4 @@
-package com.personal.yzq.token.model;
+package com.personal.yzq.token.representation;
 
 import lombok.Value;
 

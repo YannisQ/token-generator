@@ -7,5 +7,5 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface CustomInfoMapper {
 
-    Custom getCustom(@Param("systemId") String systemId, @Param("systemSecret") String systemSecret);
+    Custom getCustom(@Param("systemId") String systemId);
 }

@@ -4,5 +4,5 @@ import com.personal.yzq.token.model.entity.Custom;
 
 public interface CustomInfoRepository {
 
-    Custom getCustom(String systemId, String systemSecret);
+    Custom getCustom(String systemId);
 }

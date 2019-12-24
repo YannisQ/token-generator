@@ -1,26 +1,13 @@
 package com.personal.yzq.token.core;
 
-import com.personal.yzq.token.model.TokenReqInfo;
+import com.personal.yzq.token.model.GetTokenCommand;
 import com.personal.yzq.token.model.TokenWrapper;
-import com.personal.yzq.token.model.entity.Custom;
 import lombok.Getter;
-import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
 
 @Getter
 public abstract class DefaultTokenGenerator implements TokenGenerator {
 
-    protected DefaultTokenGenerator(TokenReqInfo tokenReqInfo) {
-        setExtensionParam(tokenReqInfo);
-        this.tokenReqInfo = tokenReqInfo;
-    }
-
-    private final TokenReqInfo tokenReqInfo;
-
-    @Setter
-    private Custom customInfo;
-
-    protected abstract boolean isPermitted();
+    protected abstract boolean otherValidation();
 
     protected abstract TokenWrapper createToken();
 
@@ -28,8 +15,8 @@ public abstract class DefaultTokenGenerator implements TokenGenerator {
     }
 
     @Override
-    public TokenWrapper generate() {
-        if (this.isPermitted()) {
+    public TokenWrapper generate(GetTokenCommand command) {
+        if (this.isPermitted(command)) {
             TokenWrapper tokenWrapper = this.createToken();
             this.afterCreateToken();
             return tokenWrapper;
@@ -37,11 +24,11 @@ public abstract class DefaultTokenGenerator implements TokenGenerator {
         return null;
     }
 
-
-    private void setExtensionParam(TokenReqInfo tokenReqInfo) {
-        String authOrgCode = tokenReqInfo.getAuthOrgCode();
-        if (StringUtils.isNotEmpty(authOrgCode)) {
-            tokenReqInfo.setOrgId(authOrgCode);
-        }
+    protected boolean isPermitted(GetTokenCommand command) {
+        command.customValidation();
+        return this.otherValidation();
     }
+
+
+
 }

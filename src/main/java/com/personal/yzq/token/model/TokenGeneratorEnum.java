@@ -1,25 +1,21 @@
 package com.personal.yzq.token.model;
 
-import com.personal.yzq.token.core.*;
-
-import java.util.function.Function;
-
 public enum TokenGeneratorEnum {
 
-    USER_PASSWORD(UserPwdTokenGenerator::new),
-    SYSTEM_PASSWORD(SystemTokenGenerator::new),
-    AUTOMATIC(AutomaticTokenGenerator::new),
-    SSO_COOKIE(SsoTokenGenerator::new),
-    CLIENT(SystemTokenGenerator::new);
+    USER_PASSWORD("userPwdTokenGenerator"),
+    SYSTEM_PASSWORD("systemPwdTokenGenerator"),
+    AUTOMATIC("automaticTokenGenerator"),
+    SSO_COOKIE("ssoTokenGenerator"),
+    CLIENT("systemTokenGenerator");
 
-    private final Function<TokenReqInfo,DefaultTokenGenerator> constructor;
+    private final String beanName;
 
-    TokenGeneratorEnum(Function<TokenReqInfo,DefaultTokenGenerator> constructor) {
-        this.constructor = constructor;
+    TokenGeneratorEnum(String beanName) {
+        this.beanName = beanName;
     }
 
-    public Function<TokenReqInfo,DefaultTokenGenerator> getConstructor() {
-        return constructor;
+    public String getBeanName() {
+        return beanName;
     }
 
 }

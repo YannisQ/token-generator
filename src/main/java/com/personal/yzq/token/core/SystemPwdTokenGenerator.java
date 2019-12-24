@@ -1,10 +1,8 @@
 package com.personal.yzq.token.core;
 
-import com.personal.yzq.token.model.TokenReqInfo;
+import org.springframework.stereotype.Component;
 
+@Component("systemPwdTokenGenerator")
 public class SystemPwdTokenGenerator extends UserTokenGenerator {
 
-    protected SystemPwdTokenGenerator(TokenReqInfo reqInfo) {
-        super(reqInfo);
-    }
 }

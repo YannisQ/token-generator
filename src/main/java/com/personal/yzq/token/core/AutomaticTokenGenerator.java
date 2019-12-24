@@ -1,10 +1,8 @@
 package com.personal.yzq.token.core;
 
-import com.personal.yzq.token.model.TokenReqInfo;
+import org.springframework.stereotype.Component;
 
+@Component("automaticTokenGenerator")
 public class AutomaticTokenGenerator extends UserTokenGenerator {
 
-    public AutomaticTokenGenerator(TokenReqInfo reqInfo) {
-        super(reqInfo);
-    }
 }

@@ -1,13 +1,11 @@
 package com.personal.yzq.token.resource;
 
-import com.personal.yzq.token.model.GetTokenCommand;
 import com.personal.yzq.token.model.TokenReqInfo;
 import com.personal.yzq.token.model.TokenWrapper;
 import com.personal.yzq.token.representation.ResultInfo;
 import com.personal.yzq.token.representation.TokenRepresentation;
 import com.personal.yzq.token.service.TokenApplicationService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,9 +25,8 @@ public class TokenResources {
 
     @RequestMapping(value = "getToken", method = RequestMethod.POST)
     public ResultInfo<TokenRepresentation> getToken(@RequestBody @Valid TokenReqInfo tokenReqInfo,
-                                                    HttpServletResponse response) throws MethodArgumentNotValidException {
-        GetTokenCommand getTokenCommand = new GetTokenCommand(tokenReqInfo);
-        TokenWrapper tokenWrapper = tokenService.getToken(getTokenCommand);
+                                                    HttpServletResponse response) {
+        TokenWrapper tokenWrapper = tokenService.getToken(tokenReqInfo);
         addResponseHeadersIfNecessary(tokenWrapper, response);
         return tokenWrapper.convertToRepresentation();
     }

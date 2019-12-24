@@ -1,17 +1,14 @@
 package com.personal.yzq.token.core;
 
-import com.personal.yzq.token.model.TokenReqInfo;
 import com.personal.yzq.token.model.TokenWrapper;
+import org.springframework.stereotype.Component;
 
+@Component("systemTokenGenerator")
 public class SystemTokenGenerator extends DefaultTokenGenerator {
 
-    public SystemTokenGenerator(TokenReqInfo reqInfo) {
-        super(reqInfo);
-    }
 
     @Override
-    protected boolean isPermitted() {
-
+    protected boolean otherValidation() {
         return false;
     }
 

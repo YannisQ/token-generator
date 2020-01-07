@@ -1,9 +1,13 @@
-package com.personal.yzq.token.model.valobj;
+package com.personal.yzq.token.model.entity;
 
 import lombok.Value;
 
 @Value
-public class CustomTokenType {
+public class CustomTokenTypeDo {
+
+    private String systemId;
+
+    private String grantType;
 
     private String tokenType;
 

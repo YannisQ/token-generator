@@ -1,13 +1,9 @@
 package com.personal.yzq.token.model.entity;
 
-import com.personal.yzq.token.model.CustomAuthority;
-import com.personal.yzq.token.model.valobj.CustomTenant;
-import lombok.Value;
+import lombok.Data;
 
-import java.util.List;
-
-@Value
-public class Custom {
+@Data
+public class CustomDo {
 
     private String systemId;
 
@@ -25,7 +21,4 @@ public class Custom {
 
     private String papushAppId;
 
-    private CustomAuthority customAuthority;
-
-    private List<CustomTenant> customTenants;
 }

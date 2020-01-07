@@ -1,12 +1,12 @@
 package com.personal.yzq.token.repository;
 
-import com.personal.yzq.token.model.entity.Token;
-import com.personal.yzq.token.model.valobj.TokenInfo;
+import com.personal.yzq.token.model.TokenWrapper;
+import com.personal.yzq.token.model.entity.TokenDo;
 
 public interface TokenRepository {
 
-    void update(Token token);
+    void save(TokenDo token);
 
-    TokenInfo getTokenInfo(Token token);
+    TokenWrapper getTokenInfo(TokenDo token);
 
 }

@@ -1,8 +1,8 @@
 package com.personal.yzq.token.repository;
 
-import com.personal.yzq.token.model.entity.Custom;
+import com.personal.yzq.token.model.CustomWrapper;
 
 public interface CustomInfoRepository {
 
-    Custom getCustom(String systemId);
+    CustomWrapper getCustom(String systemId);
 }

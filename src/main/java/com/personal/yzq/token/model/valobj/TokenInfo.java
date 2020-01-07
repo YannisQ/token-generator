@@ -5,6 +5,7 @@ import lombok.Value;
 import java.util.Date;
 
 @Value
+@Deprecated
 public class TokenInfo {
 
     private String tokenValue;

@@ -1,10 +1,14 @@
 package com.personal.yzq.token.repository;
 
-import com.personal.yzq.token.model.entity.Custom;
+import com.personal.yzq.token.model.CustomWrapper;
+import com.personal.yzq.token.model.entity.CustomDo;
+import com.personal.yzq.token.model.entity.CustomTenantDo;
+import com.personal.yzq.token.model.entity.CustomTokenTypeDo;
 import com.personal.yzq.token.repository.mapper.CustomInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -14,16 +18,19 @@ public class CustomInfoDbRepository implements CustomInfoRepository {
     @Autowired
     private CustomInfoMapper customInfoMapper;
 
-    private Map<String, Custom> customCache = new ConcurrentHashMap<>();
+    private Map<String, CustomWrapper> customCache = new ConcurrentHashMap<>();
 
     @Override
-    public Custom getCustom(String systemId) {
-        Custom custom = customCache.get(systemId);
-        if (null == custom) {
-            custom = customInfoMapper.getCustom(systemId);
-            customCache.put(systemId, custom);
+    public CustomWrapper getCustom(String systemId) {
+        CustomWrapper customWrapper = customCache.get(systemId);
+        if (null == customWrapper) {
+            CustomDo customDo = customInfoMapper.getCustomDo(systemId);
+            List<CustomTokenTypeDo> customTokenTypeDoList = customInfoMapper.getCustomTokenTypeDo(systemId);
+            List<CustomTenantDo> customTenantDoList = customInfoMapper.getCustomTenantDo(systemId);
+            customWrapper = new CustomWrapper(customDo, customTokenTypeDoList, customTenantDoList);
+            customCache.put(systemId, customWrapper);
         }
-        return custom;
+        return customWrapper;
     }
 
 }

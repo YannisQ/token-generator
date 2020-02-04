@@ -2,19 +2,26 @@ package com.personal.yzq.token.model;
 
 import com.google.common.collect.Lists;
 import com.personal.yzq.token.exception.AdaptedIllegalArgumentException;
+import com.personal.yzq.token.model.entity.CustomTenantDo;
 import com.personal.yzq.token.model.entity.TokenDo;
 import com.personal.yzq.token.repository.CustomInfoRepository;
+import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GetTokenCommand {
 
     private final TokenReqInfo tokenReqInfo;
 
     private final CustomWrapper customWrapper;
+
+    @Getter
+    @Setter
+    private String lesseeId;
 
     @Setter
     private TokenWrapper dbToken;
@@ -87,4 +94,25 @@ public class GetTokenCommand {
         }
         return dbToken;
     }
+
+    public List<String> getConfiguredValidLesseeId() {
+        List<CustomTenantDo> tenantDoList = customWrapper.getTenant();
+        List<String> lesseeList = tenantDoList.stream().filter(customTenantDo ->
+                StringUtils.equalsIgnoreCase(customTenantDo.getIsValid(), "y")
+        ).map(c -> c.getLesseeId()).collect(Collectors.toList());
+        return lesseeList;
+    }
+
+    public String getUserId() {
+        return tokenReqInfo.getUserId();
+    }
+
+    public String getBusinessFiled() {
+        return customWrapper.getCustomDo().getBusinessField();
+    }
+
+    public String getOrgId() {
+        return tokenReqInfo.getOrgId();
+    }
+
 }
